@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Независимый обзор техники XI уровня World of Tanks: машины, механики, улучшения и исторический контекст.">
+  <title>XI уровень — Предел техники</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="На главную">
+      <span class="brand-mark">XI</span>
+      <span>ПРЕДЕЛ<br><em>ТЕХНИКИ</em></span>
+    </a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#catalog">Каталог</a>
+      <a href="#mechanics">Механики</a>
+      <a href="#history">История</a>
+    </nav>
+    <a class="header-link" href="#catalog">Изучить машины <span>↘</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> World of Tanks / Update 2.0</p>
+        <h1>НОВЫЙ<br><strong>ПРЕДЕЛ</strong></h1>
+        <p class="hero-copy">Тридцать пять машин. Четыре боевые роли. Одиннадцатый уровень меняет правила игры, оставляя в строю главное — мастерство командира.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#catalog">Смотреть каталог <span>↓</span></a>
+          <a class="button button-quiet" href="#mechanics">Разобраться в механиках <span>↗</span></a>
+        </div>
+      </div>
+      <div class="hero-visual" role="img" aria-label="Место для изображения техники XI уровня">
+        <img class="hero-image" src="assets/images/hero-tier-11.jpg" alt="Техника XI уровня World of Tanks">
+        <div class="image-note">IMAGE / hero-tier-11.jpg</div>
+        <div class="hero-stamp">35<br><small>МАШИН<br>XI УРОВНЯ</small></div>
+      </div>
+      <div class="scroll-note">Листайте, чтобы исследовать <span>↓</span></div>
+    </section>
+
+    <section class="intro section-shell">
+      <div class="section-label">01 / Введение</div>
+      <div class="intro-layout">
+        <div>
+          <p class="kicker">Эволюция, а не революция</p>
+          <h2>Знакомые роли.<br><span>Новый масштаб.</span></h2>
+        </div>
+        <div class="intro-text">
+          <p>XI уровень продолжает ветки культовых «десяток», но даёт каждой машине собственный тактический характер. Здесь недостаточно просто знать ТТХ: важно понимать, <i>когда</i> включать сильную сторону машины.</p>
+          <div class="fact-row"><strong>325 000</strong><span>опыта на исследование</span><strong>7 400 000</strong><span>кредитов на покупку</span></div>
+        </div>
+      </div>
+      <div class="role-strip">
+        <div><b>19</b><span>Тяжёлых<br>танков</span></div>
+        <div><b>09</b><span>Средних<br>танков</span></div>
+        <div><b>05</b><span>ПТ-САУ</span></div>
+        <div><b>02</b><span>Лёгких<br>танка</span></div>
+      </div>
+    </section>
+
+    <section class="catalog section-shell" id="catalog">
+      <div class="section-heading">
+        <div><div class="section-label">02 / Каталог</div><h2>Все машины <span>XI уровня</span></h2></div>
+        <p>Фильтруйте по роли, ищите по названию и открывайте карточки, чтобы увидеть наследника, стиль игры и особую механику.</p>
+      </div>
+      <div class="catalog-tools">
+        <div class="filters" role="tablist" aria-label="Фильтр по классу">
+          <button class="filter-button active" data-filter="all">Все <span>35</span></button>
+          <button class="filter-button" data-filter="heavy">ТТ <span>19</span></button>
+          <button class="filter-button" data-filter="medium">СТ <span>09</span></button>
+          <button class="filter-button" data-filter="td">ПТ <span>05</span></button>
+          <button class="filter-button" data-filter="light">ЛТ <span>02</span></button>
+        </div>
+        <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Найти машину..." aria-label="Найти машину"></label>
+      </div>
+      <div class="carousel-controls" aria-label="Навигация по карточкам техники">
+        <button class="carousel-button" id="carousel-prev" type="button" aria-label="Предыдущие машины">←</button>
+        <span>Листайте карточки</span>
+        <button class="carousel-button" id="carousel-next" type="button" aria-label="Следующие машины">→</button>
+      </div>
+      <div class="vehicle-grid" id="vehicle-grid"></div>
+      <p class="empty-state" id="empty-state" hidden>Машины с таким названием не найдены.</p>
+    </section>
+
+    <section class="mechanics section-shell" id="mechanics">
+      <div class="section-heading"><div><div class="section-label">03 / Система</div><h2>Тактика получает<br><span>новый инструмент</span></h2></div><p>У каждой машины XI уровня есть особая механика. Она расширяет привычную роль, а не отменяет её.</p></div>
+      <div class="mechanic-grid">
+        <article class="mechanic-card mechanic-featured"><div class="mechanic-number">01</div><div><p class="kicker">Индивидуальность</p><h3>Особая механика</h3><p>Активная способность, пассивный бонус или ситуативное усиление — новый инструмент всегда связан с боевой ролью машины.</p></div><div class="mechanic-icon">◈</div></article>
+        <article class="mechanic-card"><div class="mechanic-number">02</div><p class="kicker">Настройка</p><h3>Дерево улучшений</h3><p>До 25 узлов без штрафов. Решайте, что важнее: огневая мощь, мобильность, выживаемость или усиление уникальной механики.</p><div class="upgrade-path"><span class="done"></span><span class="done"></span><span class="current"></span><span></span><span></span></div></article>
+        <article class="mechanic-card"><div class="mechanic-number">03</div><p class="kicker">Признание</p><h3>Элитный статус</h3><p>Откройте все узлы, проводите бои и получайте эксклюзивные элементы: объёмный стиль, кожух ствола и счётчик статистики.</p><a href="#history" class="text-link">Подробнее об эволюции ↗</a></article>
+      </div>
+    </section>
+
+    <section class="spotlight section-shell">
+      <div class="spotlight-image"><img class="spotlight-photo" src="assets/images/tank-taschenratte.jpg" alt="Taschenratte XI уровня"><div class="image-note">IMAGE / tank-taschenratte.jpg</div><div class="spotlight-mark">T</div></div>
+      <div class="spotlight-copy"><div class="section-label">04 / Фокус</div><p class="kicker">Наследник Maus</p><h2>Taschenratte</h2><p>Сверхтяжёлый танк, созданный пережить всех. Его дополнительное вооружение позволяет стрелять осколочно-фугасными снарядами из двух тактических орудий, пока перезаряжается основное.</p><div class="spec-list"><div><span>Роль</span><b>Прорыв / удержание</b></div><div><span>Сильная сторона</span><b>Выживаемость и контроль</b></div><div><span>Предшественник</span><b>Maus</b></div></div></div>
+    </section>
+
+    <section class="history section-shell" id="history">
+      <div class="section-label">05 / Контекст</div>
+      <div class="history-layout"><div><h2>Сталь помнит<br><span>своих предков</span></h2><p>Названия и образы XI уровня отсылают к реальным инженерным школам и истории бронетехники. В игре это не музейные экспонаты, а отправная точка для новых игровых ролей.</p><div class="history-machines"><article><b>MBT-B</b><span>Современная концепция тяжёлого танка поддержки с комфортным магазином заряжания.</span></article><article><b>Объект 292</b><span>Экспериментальная советская машина, известная крупнокалиберным орудием.</span></article><article><b>Mausekönig</b><span>«Королевский Маус»: четырёхгусеничный немецкий монстр с двуствольным орудием.</span></article></div></div><div class="history-card"><div class="image-note">IMAGE / history-steel.jpg</div><div class="timeline"><div><b>1940—50-е</b><span>Тяжёлая броня и артиллерийская мощь</span></div><div><b>1960—80-е</b><span>Мобильность, автоматизация, новые компоновки</span></div><div class="timeline-current"><b>UPDATE 2.0 / «АЛЬФА»</b><span>Гибрид истории и экспериментальной тактики</span></div></div></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="brand"><span class="brand-mark">XI</span><span>ПРЕДЕЛ<br><em>ТЕХНИКИ</em></span></div><p>Независимый фанатский обзор. World of Tanks и связанные товарные знаки принадлежат их правообладателям.</p><nav class="social-links" aria-label="Социальные сети"><a class="social-link telegram" href="https://t.me/official_mirtankovru" target="_blank" rel="noreferrer" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 3.3 18.5 20c-.2 1.2-.9 1.5-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.9 13.6.9 12c-1.1-.3-1.1-1.1.2-1.6L20.6 2.7c.9-.3 1.7.2 1.1.6Z"></path></svg></a><a class="social-link vk" href="https://vk.com/mirtankov" target="_blank" rel="noreferrer" aria-label="VK" title="VK"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 18.2h1.3s.4-.1.6-.5c.2-.4.2-1.2 1.1-1.4.9-.3 2 1.7 3.2 1.9h2.6s.8-.1.4-.9c-.3-.7-2.5-2.1-2.6-2.8-.1-.7 1.2-2 1.5-3.2.2-.8 0-1.2-.8-1.2h-2.6c-.6 0-.8.3-.9.8 0 0-.5 1.9-1.2 2.2-.5.3-.7-.2-.7-.6V11c0-.5-.2-.7-.7-.8h-2.1c-.4 0-.6.2-.5.5.2.7.2 1.4.1 2.1-.1.8-.2 1.1-.6 1.1-.4 0-1.4-1.9-2-3.1-.2-.4-.4-.6-1-.6H5.5c-.5 0-.6.2-.5.6.9 2.5 3.8 7.4 8 7.4Z"></path></svg></a><a class="social-link discord" href="https://discord.com/invite/mtcis" target="_blank" rel="noreferrer" aria-label="Discord" title="Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.1A16.4 16.4 0 0 0 15.6 4l-.5 1a14.7 14.7 0 0 0-2.2-.2c-.8 0-1.5.1-2.2.2l-.5-1a16.4 16.4 0 0 0-3.9 1.1C3.8 8.4 3.2 11.6 3.4 14.8a16 16 0 0 0 4.8 2.4l1.2-1.6c-.7-.3-1.3-.7-1.9-1.1l.5-.4c1.8.8 3.8 1.2 5.9 1.2s4.1-.4 5.9-1.2l.5.4c-.6.4-1.2.8-1.9 1.1l1.2 1.6a16 16 0 0 0 4.8-2.4c.2-3.2-.4-6.4-2.9-9.7ZM9.8 13.5c-.6 0-1.1-.6-1.1-1.3s.5-1.3 1.1-1.3 1.1.6 1.1 1.3-.5 1.3-1.1 1.3Zm4.4 0c-.6 0-1.1-.6-1.1-1.3s.5-1.3 1.1-1.3 1.1.6 1.1 1.3-.5 1.3-1.1 1.3Z"></path></svg></a><a class="social-link youtube" href="https://www.youtube.com/c/MirTankovOfficial" target="_blank" rel="noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.8 4.7 12 4.7 12 4.7s-5.8 0-7.6.5a2.8 2.8 0 0 0-2 2C2 9 2 12 2 12s0 3 .4 4.8a2.8 2.8 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.8 2.8 0 0 0 2-2c.4-1.8.4-4.8.4-4.8s0-3-.4-4.8ZM10 15.8V8.2l6.5 3.8-6.5 3.8Z"></path></svg></a></nav></footer>
+  <a class="floating-top-button" href="#top" aria-label="Вернуться наверх">↑ <span>Наверх</span></a>
+  <script src="script.js"></script>
+</body>
+</html>
