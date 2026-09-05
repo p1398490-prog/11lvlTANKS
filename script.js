@@ -35,7 +35,54 @@ const vehicles = [
   { name: 'Eisbär', type: 'heavy', role: 'Тяжёлый танк', ancestor: 'Награда второго сезона «Орбиты»', mechanic: 'Подогрев боеприпасов', color: '#6e7b6c', image: 'tank-eisbar.png' },
   { name: 'Mausekönig', type: 'heavy', role: 'Акционный тяжёлый танк', ancestor: 'Кампания ЛБЗ «Новые горизонты»', mechanic: 'Рекуператор отката', color: '#4f5f52', image: 'tank-mausekonig.png' }
 ];
+const historicalData = {
+  'КР-1': ['СССР', '1949', 'ИС-7', 'Сверхтяжёлый прорыв', 'Продолжает советскую школу тяжёлых танков: мощная броня сочетается с экспериментальной реактивной защитой.'],
+  'AMX 67 Imbattable': ['Франция', '1957', 'AMX 50 B', 'Манёвренный тяжёлый танк', 'Французская идея быстрой тяжёлой машины получила развитие в виде усиленного барабана.'],
+  'FV4025 Contriver': ['Великобритания', '1962', 'FV230 Canopener', 'Универсальная платформа', 'Британская конструкторская линия соединила защищённость с гибкой тактикой применения орудия.'],
+  'Taschenratte': ['Германия', '1946', 'Maus', 'Сверхтяжёлый эксперимент', 'Фантазия на тему немецких сверхтяжёлых проектов: наследует Maus и добавляет вспомогательные орудия.'],
+  'T803': ['США', '1960', 'T110E5', 'Тяжёлый танк поддержки', 'Американская школа точной стабилизации позволяет тяжёлому танку быстро отвечать на смену фронта.'],
+  'BZ-79': ['Китай', '1979', 'BZ-75', 'Ракетный прорыв', 'Развитие китайских проектов с ракетными ускорителями для раннего занятия ключевых позиций.'],
+  'Black Rock': ['Международный проект', '1988', 'Особая машина', 'Экспериментальная броня', 'Условный проект закрытой программы с многослойной бронёй и модульной компоновкой.'],
+  'Объект 432У': ['СССР', '1964', 'Объект 430У', 'Средний танк нового поколения', 'Советская школа искала баланс низкого силуэта и огневой мощи через адаптивную защиту.'],
+  'Leopard 120 Verbessert': ['Германия', '1965', 'Leopard 1', 'Точный огонь', 'Западногерманская концепция подвижного танка получила усиленное орудие для боя с дистанции.'],
+  'CS 67 Szakal': ['Польша', '1967', 'CS-63', 'Высокая динамика', 'Польская инженерная школа развивала ходовую часть для быстрого занятия флангов.'],
+  'AS-XX 40 t': ['Франция', '1959', 'Bat.-Châtillon 25 t', 'Автомат заряжания', 'Наследник французских опытных машин с компактной башней и короткими решающими атаками.'],
+  'XM69 Hacker': ['США', '1971', 'M48A5 Patton', 'Цифровая разведка', 'Гипотетическое продолжение Patton, где командир получает больше информации о слабых местах цели.'],
+  'Hirschkäfer': ['Германия', '1944', 'Grille 15', 'Дальняя огневая поддержка', 'Концепция выросла из немецких самоходных орудий и точной работы по открытым направлениям.'],
+  'Strv 107-12': ['Швеция', '1970', 'Strv 103B', 'Безбашенная компоновка', 'Шведская идея низкого силуэта и осадного режима превращает подготовленную позицию в преимущество.'],
+  'AT-FV230 Breaker': ['Великобритания', '1950', 'FV217 Badger', 'Штурмовая ПТ-САУ', 'Британские противотанковые проекты делали ставку на лобовую броню и скорострельность.'],
+  'LeKpz Borkenkäfer': ['Германия', '1973', 'Rheinmetall Panzerwagen', 'Разведывательная машина', 'Лёгкая платформа объединяет немецкую оптику с импульсной разведкой впереди группы.'],
+  'Vz. 63P': ['Чехословакия', '1963', 'Vz. 55', 'Тяжёлый танк огневой поддержки', 'Чехословацкая линия сочетала компактность и мощное вооружение с гибким взрывателем.'],
+  'BV-111': ['Швеция', '1981', 'UDES 15/16', 'Адаптивный средний танк', 'Проект опирается на шведские идеи подвески и смены темпа боя без потери мобильности.'],
+  'CAV mod. 71': ['Италия', '1971', 'Progetto M40 mod. 65', 'Автомат заряжания', 'Итальянская традиция экспериментальных механизмов превращена в короткие серии выстрелов.'],
+  'WZ-219': ['Китай', '1970', 'WZ-132-1', 'Активная разведка', 'Китайская лёгкая машина использует компактность и инфракрасный поиск для раннего обнаружения.'],
+  'Ho-Ri Shugo': ['Япония', '1945', 'Ho-Ri 3', 'Противотанковый резерв', 'Японская ветка Ho-Ri получила ракетную установку для усиления первого залпа.'],
+  'Gorilla': ['США', '1968', 'T110E4', 'Тяжёлая огневая мощь', 'Американский проект сохраняет идею мощной ПТ-САУ и дольше удерживает давление на направлении.'],
+  'Fauteur': ['Франция', '1954', 'AMX M4 mle. 54', 'Штурмовой тяжёлый танк', 'Французская концепция тяжёлого танка получила оружие для агрессивных ближних разменов.'],
+  'Executor': ['Великобритания', '2010', 'Concept No. 5', 'Быстрый средний танк', 'Современная британская идея высокой подвижности дополнена турбонаддувом.'],
+  'Pz.Kpfw. Neu': ['Германия', '1967', 'Kpz. 67', 'Технологичный тяжёлый танк', 'Немецкая точность соединена с системой калибровки снаряда и расчётливой тактикой.'],
+  'PTZ-78': ['Китай', '1978', 'WZ-113G FT', 'Ракетная ПТ-САУ', 'Концепция противотанковой машины с последовательным ускорением боеприпасов.'],
+  'STK-2': ['Япония', '1971', 'Type 71', 'Тяжёлый танк удержания', 'Японская линия делает акцент на контроле температуры орудия в затяжном бою.'],
+  'Ares 90 C': ['Италия', '1990', 'Ares 90', 'Средний танк поддержки', 'Итальянский проект превращает управление нагревом автопушки в отдельный тактический ресурс.'],
+  'Объект 279': ['СССР', '1959', 'Опытный Объект 279', 'Танк прорыва', 'Реальный Объект 279 проектировался для зон разрушения; игровая версия развивает эту идею.'],
+  'BZT-70': ['СССР', '1970', 'Опытные танки 1970-х', 'Гибридная силовая установка', 'Позднесоветская тяга к экспериментальным силовым установкам отражена в электромашине.'],
+  'MBT-B': ['США', '1976', 'Основной боевой танк нового поколения', 'Универсальный MBT', 'Концепция основного боевого танка объединяет защищённость и комфортный темп огня.'],
+  'Champion': ['Великобритания', '1984', 'Экспериментальная платформа', 'Танк длительного боя', 'Проект делает ставку на выносливость систем и эффективное охлаждение.'],
+  'ARL Projet F': ['Франция', '1946', 'ARL 44', 'Тяжёлая платформа', 'После войны французские конструкторы искали собственный путь к тяжёлому танку.'],
+  'Eisbär': ['Германия', '1952', 'Экспериментальные тяжёлые танки', 'Танк северного театра', 'Образ связан с эксплуатацией техники в холодном климате и подготовкой боеприпасов.'],
+  'Mausekönig': ['Германия', '1946', 'Maus', 'Сверхтяжёлый акционный танк', '«Королевский Маус» развивает идею сверхтяжёлой брони и использует откат как ресурс.']
+};
+Object.entries(historicalData).forEach(([name, data], index) => {
+  const vehicle = vehicles.find(item => item.name === name);
+  const baseStats = { heavy: [2600, 130, 330, 35], medium: [2100, 105, 250, 55], td: [1900, 145, 360, 28], light: [1500, 80, 190, 72] }[vehicle.type];
+  Object.assign(vehicle, { country: data[0], year: data[1], prototype: data[2], design: data[3], history: data[4], stats: { hp: baseStats[0] + index * 15, damage: baseStats[1] + index % 5 * 3, penetration: baseStats[2] + index % 4 * 8, speed: baseStats[3] + index % 3 * 2 } });
+});
 const labels = { heavy: 'ТТ', medium: 'СТ', td: 'ПТ', light: 'ЛТ' };
+const statLabels = { hp: 'Прочность', damage: 'Средний урон', penetration: 'Пробитие', speed: 'Скорость' };
+const favoriteKey = 'xi-tanks-favorites';
+const compareKey = 'xi-tanks-compare';
+const favorites = new Set(JSON.parse(localStorage.getItem(favoriteKey) || '[]'));
+let compareSelection = JSON.parse(localStorage.getItem(compareKey) || '[]');
 const grid = document.querySelector('#vehicle-grid');
 const search = document.querySelector('#search');
 const emptyState = document.querySelector('#empty-state');
@@ -53,31 +100,114 @@ function renderVehicles() {
 
   grid.innerHTML = visible.map((vehicle, index) => `
     <article class="vehicle-card" data-vehicle="${vehicle.name}" style="animation-delay: ${index * 35}ms">
-      <div class="card-image" style="--vehicle-color: ${vehicle.color}">
-        <img class="vehicle-image" src="assets/images/${vehicle.cardImage || vehicle.image}" alt="${vehicle.name}" onload="this.parentElement.classList.add('has-image')" onerror="this.hidden = true">
-        <span class="image-note">IMAGE / ${vehicle.cardImage || vehicle.image}</span>
-        <span class="class-tag">${labels[vehicle.type]} · XI</span>
-      </div>
-      <div class="card-info">
-        <span class="card-role">${vehicle.role}</span>
-        <h3>${vehicle.name}</h3>
-        <p>${vehicle.mechanic}</p>
-        <div class="card-meta"><span>Наследник</span><strong>${vehicle.ancestor}</strong></div>
+      <a class="card-link" href="tank.html?name=${encodeURIComponent(vehicle.name)}" aria-label="Открыть страницу танка ${vehicle.name}">
+        <div class="card-image" style="--vehicle-color: ${vehicle.color}">
+          <img class="vehicle-image" src="assets/images/${vehicle.cardImage || vehicle.image}" alt="${vehicle.name}" onload="this.parentElement.classList.add('has-image')" onerror="this.hidden = true">
+          <span class="image-note">IMAGE / ${vehicle.cardImage || vehicle.image}</span>
+          <span class="class-tag">${labels[vehicle.type]} · XI</span>
+        </div>
+        <div class="card-info">
+          <span class="card-role">${vehicle.role}</span>
+          <h3>${vehicle.name}</h3>
+          <p>${vehicle.mechanic}</p>
+          <div class="card-meta"><span>Наследник</span><strong>${vehicle.ancestor}</strong></div>
+        </div>
+      </a>
+      <div class="card-actions">
+        <button class="favorite-button ${favorites.has(vehicle.name) ? 'active' : ''}" type="button" data-favorite="${vehicle.name}" aria-label="${favorites.has(vehicle.name) ? 'Убрать из избранного' : 'Добавить в избранное'}">★</button>
+        <button class="compare-button ${compareSelection.includes(vehicle.name) ? 'active' : ''}" type="button" data-compare="${vehicle.name}">${compareSelection.includes(vehicle.name) ? 'В сравнении' : 'Сравнить'}</button>
       </div>
     </article>
   `).join('');
   emptyState.hidden = visible.length > 0;
+  grid.querySelectorAll('[data-favorite]').forEach(button => button.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const name = button.dataset.favorite;
+    favorites.has(name) ? favorites.delete(name) : favorites.add(name);
+    localStorage.setItem(favoriteKey, JSON.stringify([...favorites]));
+    renderVehicles();
+  }));
+  grid.querySelectorAll('[data-compare]').forEach(button => button.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const name = button.dataset.compare;
+    if (compareSelection.includes(name)) compareSelection = compareSelection.filter(item => item !== name);
+    else if (compareSelection.length < 2) compareSelection = [...compareSelection, name];
+    localStorage.setItem(compareKey, JSON.stringify(compareSelection));
+    renderVehicles();
+    renderComparison();
+  }));
 }
 
-document.querySelectorAll('.filter-button').forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelector('.filter-button.active').classList.remove('active');
-    button.classList.add('active');
-    activeFilter = button.dataset.filter;
+function renderComparison() {
+  const panel = document.querySelector('#comparison-panel');
+  if (!panel) return;
+  const selected = compareSelection.map(name => vehicles.find(vehicle => vehicle.name === name)).filter(Boolean);
+  panel.hidden = selected.length === 0;
+  panel.innerHTML = selected.length === 0 ? '' : `
+    <div class="comparison-heading"><div><p class="section-label">Сравнение</p><h3>${selected.length === 2 ? 'Две машины. Один выбор.' : 'Выберите ещё одну машину'}</h3></div><button class="clear-compare" type="button">Очистить</button></div>
+    ${selected.length === 2 ? `<div class="comparison-table"><div class="comparison-row comparison-title"><span>Параметр</span>${selected.map(vehicle => `<strong>${vehicle.name}</strong>`).join('')}</div>${Object.entries(statLabels).map(([key, label]) => `<div class="comparison-row"><span>${label}</span>${selected.map(vehicle => `<b>${vehicle.stats[key]}${key === 'speed' ? ' км/ч' : key === 'penetration' ? ' мм' : ''}</b>`).join('')}</div>`).join('')}</div>` : `<p class="comparison-hint">Нажмите «Сравнить» на любой другой карточке.</p>`}
+  `;
+  panel.querySelector('.clear-compare')?.addEventListener('click', () => {
+    compareSelection = [];
+    localStorage.setItem(compareKey, '[]');
     renderVehicles();
+    renderComparison();
   });
-});
-search.addEventListener('input', renderVehicles);
-previousButton.addEventListener('click', () => grid.scrollBy({ left: -grid.clientWidth * 0.82, behavior: 'smooth' }));
-nextButton.addEventListener('click', () => grid.scrollBy({ left: grid.clientWidth * 0.82, behavior: 'smooth' }));
-renderVehicles();
+}
+
+if (grid) {
+  document.querySelectorAll('.filter-button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelector('.filter-button.active').classList.remove('active');
+      button.classList.add('active');
+      activeFilter = button.dataset.filter;
+      renderVehicles();
+    });
+  });
+  search.addEventListener('input', renderVehicles);
+  previousButton.addEventListener('click', () => grid.scrollBy({ left: -grid.clientWidth * 0.82, behavior: 'smooth' }));
+  nextButton.addEventListener('click', () => grid.scrollBy({ left: grid.clientWidth * 0.82, behavior: 'smooth' }));
+  renderVehicles();
+  renderComparison();
+}
+
+const detail = document.querySelector('#tank-detail');
+if (detail) {
+  const requestedName = new URLSearchParams(window.location.search).get('name');
+  const vehicle = vehicles.find(item => item.name === requestedName) || vehicles[0];
+  const historicalContext = `${vehicle.history} Предшественник этой машины — ${vehicle.prototype}; игровая концепция продолжает эту инженерную линию через механику «${vehicle.mechanic.toLowerCase()}».`;
+
+  document.title = `${vehicle.name} — Предел техники`;
+  detail.innerHTML = `
+    <div class="detail-hero">
+      <div class="detail-visual" style="--vehicle-color: ${vehicle.color}">
+        <img src="assets/images/${vehicle.cardImage || vehicle.image}" alt="${vehicle.name}" onload="this.parentElement.classList.add('has-image')" onerror="this.hidden = true">
+        <span class="class-tag">${labels[vehicle.type]} · XI</span>
+        <span class="image-note">IMAGE / ${vehicle.cardImage || vehicle.image}</span>
+      </div>
+      <div class="detail-heading">
+        <p class="eyebrow"><span></span> Карточка машины / XI уровень</p>
+        <h1>${vehicle.name}</h1>
+        <p class="detail-lead">${vehicle.role} с уникальной специализацией: ${vehicle.mechanic.toLowerCase()}.</p>
+        <a class="button button-primary" href="index.html#catalog">Вернуться в каталог <span>↗</span></a>
+      </div>
+    </div>
+    <div class="detail-columns">
+      <section class="detail-panel">
+        <p class="section-label">01 / Профиль</p>
+        <h2>Что важно<br><span>в бою</span></h2>
+        <p>Эта машина раскрывается через свою основную роль — ${vehicle.role.toLowerCase()}. Планируйте позицию от сильной стороны и включайте особую механику «${vehicle.mechanic.toLowerCase()}» в момент, когда она меняет исход размена.</p>
+        <div class="spec-list"><div><span>Роль</span><b>${vehicle.role}</b></div><div><span>Уникальная механика</span><b>${vehicle.mechanic}</b></div><div><span>Наследник</span><b>${vehicle.ancestor}</b></div></div>
+      </section>
+      <section class="detail-history">
+        <p class="section-label">02 / Историческая справка</p>
+        <h2>Откуда<br><span>растут гусеницы</span></h2>
+        <p>${historicalContext}</p>
+        <div class="history-facts"><div><span>Страна</span><b>${vehicle.country}</b></div><div><span>Период проекта</span><b>${vehicle.year}</b></div><div><span>Конструкторская идея</span><b>${vehicle.design}</b></div></div>
+        <div class="history-quote">«Каждая новая машина — это не отказ от прошлого, а следующий ответ на вопрос о том, каким должен быть танк».</div>
+      </section>
+    </div>
+  `;
+}
