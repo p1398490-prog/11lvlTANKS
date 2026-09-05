@@ -111,6 +111,7 @@ function renderVehicles() {
       </a>
       <div class="card-actions">
         <button class="favorite-button ${favorites.has(vehicle.name) ? 'active' : ''}" type="button" data-favorite="${vehicle.name}" aria-label="${favorites.has(vehicle.name) ? 'Убрать из избранного' : 'Добавить в избранное'}">★</button>
+        <a class="detail-button" href="tank.html?name=${encodeURIComponent(vehicle.name)}#armor-inspector">Детально посмотреть <span>↗</span></a>
       </div>
     </article>
   `).join('');
@@ -161,6 +162,22 @@ if (detail) {
         <a class="button button-primary" href="index.html#catalog">Вернуться в каталог <span>↗</span></a>
       </div>
     </div>
+    <section class="armor-inspector" id="armor-inspector">
+      <div class="armor-inspector-heading"><div><p class="section-label">03 / Armor Inspector</p><h2>Рассмотреть<br><span>броню</span></h2></div><p>Переключайте ракурс модели. Для машин, у которых пока есть один исходный render, просмотр использует его как основу.</p></div>
+      <div class="armor-viewer" data-viewer>
+        <div class="armor-viewer-stage" style="--vehicle-color: ${vehicle.color}">
+          <img data-view-image src="assets/images/${vehicle.image}" alt="${vehicle.name}, вид спереди">
+          <span class="image-note">WOT INSPECTOR / ${vehicle.image}</span>
+          <span class="armor-view-label" data-view-label>ВИД СПЕРЕДИ</span>
+        </div>
+        <div class="armor-view-controls" role="tablist" aria-label="Ракурс танка">
+          <button class="armor-view-button active" type="button" data-view="front" role="tab" aria-selected="true">Спереди</button>
+          <button class="armor-view-button" type="button" data-view="side" role="tab" aria-selected="false">Сбоку</button>
+          <button class="armor-view-button" type="button" data-view="rear" role="tab" aria-selected="false">Сзади</button>
+        </div>
+        <p class="armor-view-note">Текущий кадр модели: ${vehicle.image}. Дополнительные ракурсы можно заменить отдельными файлами Armor Inspector в папке assets/images.</p>
+      </div>
+    </section>
     <div class="detail-columns">
       <section class="detail-panel">
         <p class="section-label">01 / Профиль</p>
@@ -177,4 +194,18 @@ if (detail) {
       </section>
     </div>
   `;
+  const viewerImage = detail.querySelector('[data-view-image]');
+  const viewerLabel = detail.querySelector('[data-view-label]');
+  const viewLabels = { front: 'ВИД СПЕРЕДИ', side: 'ВИД СБОКУ', rear: 'ВИД СЗАДИ' };
+  detail.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
+    detail.querySelector('.armor-view-button.active').classList.remove('active');
+    detail.querySelector('.armor-view-button[aria-selected="true"]').setAttribute('aria-selected', 'false');
+    button.classList.add('active');
+    button.setAttribute('aria-selected', 'true');
+    const view = button.dataset.view;
+    const viewFile = vehicle.views?.[view] || vehicle.image;
+    viewerImage.src = `assets/images/${viewFile}`;
+    viewerImage.alt = `${vehicle.name}, ${viewLabels[view].toLowerCase()}`;
+    viewerLabel.textContent = viewLabels[view];
+  }));
 }

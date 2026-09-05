@@ -526,6 +526,26 @@ h2 span {
   gap: 8px;
   padding: 0 14px 14px;
 }
+.detail-button {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font: 700 10px var(--body);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.detail-button span {
+  color: var(--rust);
+  font-size: 15px;
+}
+.detail-button:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
 .favorite-button {
   border: 1px solid var(--line);
   background: transparent;
@@ -1019,6 +1039,98 @@ h2 span {
   font-size: 14px;
   margin-bottom: 32px;
 }
+.armor-inspector {
+  padding: 90px 5vw;
+  background: #141b19;
+}
+.armor-inspector-heading {
+  max-width: 1500px;
+  margin: 0 auto 42px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+}
+.armor-inspector-heading h2 {
+  margin: 0;
+}
+.armor-inspector-heading > p {
+  max-width: 330px;
+  margin: 0 2vw 6px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.armor-viewer {
+  max-width: 1500px;
+  margin: auto;
+  background: #202b27;
+  border: 1px solid var(--line);
+}
+.armor-viewer-stage {
+  min-height: 470px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #30433b;
+}
+.armor-viewer-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+  background-size: 54px 54px;
+}
+.armor-viewer-stage img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 470px;
+  object-fit: contain;
+  filter: saturate(0.82) contrast(1.05);
+}
+.armor-viewer-stage .image-note {
+  z-index: 2;
+}
+.armor-view-label {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  bottom: 17px;
+  color: var(--acid);
+  font: 800 12px var(--display);
+  letter-spacing: 0.12em;
+}
+.armor-view-controls {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  border-top: 1px solid var(--line);
+}
+.armor-view-button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: 700 10px var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.armor-view-button:hover,
+.armor-view-button.active {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.armor-view-note {
+  margin: 0;
+  padding: 0 16px 18px;
+  color: var(--muted);
+  font-size: 10px;
+}
 .detail-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1253,6 +1365,26 @@ h2 span {
   .detail-panel,
   .detail-history {
     padding: 70px 20px;
+  }
+  .armor-inspector {
+    padding: 70px 20px;
+  }
+  .armor-inspector-heading {
+    display: block;
+  }
+  .armor-inspector-heading > p {
+    margin: 25px 0 0;
+  }
+  .armor-viewer-stage,
+  .armor-viewer-stage img {
+    min-height: 280px;
+    height: 280px;
+  }
+  .armor-view-controls {
+    overflow-x: auto;
+  }
+  .armor-view-button {
+    flex: 0 0 auto;
   }
 }
 @media (max-width: 400px) {
