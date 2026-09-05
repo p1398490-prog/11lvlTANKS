@@ -72,17 +72,13 @@ const historicalData = {
   'Eisbär': ['Германия', '1952', 'Экспериментальные тяжёлые танки', 'Танк северного театра', 'Образ связан с эксплуатацией техники в холодном климате и подготовкой боеприпасов.'],
   'Mausekönig': ['Германия', '1946', 'Maus', 'Сверхтяжёлый акционный танк', '«Королевский Маус» развивает идею сверхтяжёлой брони и использует откат как ресурс.']
 };
-Object.entries(historicalData).forEach(([name, data], index) => {
+Object.entries(historicalData).forEach(([name, data]) => {
   const vehicle = vehicles.find(item => item.name === name);
-  const baseStats = { heavy: [2600, 130, 330, 35], medium: [2100, 105, 250, 55], td: [1900, 145, 360, 28], light: [1500, 80, 190, 72] }[vehicle.type];
-  Object.assign(vehicle, { country: data[0], year: data[1], prototype: data[2], design: data[3], history: data[4], stats: { hp: baseStats[0] + index * 15, damage: baseStats[1] + index % 5 * 3, penetration: baseStats[2] + index % 4 * 8, speed: baseStats[3] + index % 3 * 2 } });
+  Object.assign(vehicle, { country: data[0], year: data[1], prototype: data[2], design: data[3], history: data[4] });
 });
 const labels = { heavy: 'ТТ', medium: 'СТ', td: 'ПТ', light: 'ЛТ' };
-const statLabels = { hp: 'Прочность', damage: 'Средний урон', penetration: 'Пробитие', speed: 'Скорость' };
 const favoriteKey = 'xi-tanks-favorites';
-const compareKey = 'xi-tanks-compare';
 const favorites = new Set(JSON.parse(localStorage.getItem(favoriteKey) || '[]'));
-let compareSelection = JSON.parse(localStorage.getItem(compareKey) || '[]');
 const grid = document.querySelector('#vehicle-grid');
 const search = document.querySelector('#search');
 const emptyState = document.querySelector('#empty-state');
@@ -115,7 +111,6 @@ function renderVehicles() {
       </a>
       <div class="card-actions">
         <button class="favorite-button ${favorites.has(vehicle.name) ? 'active' : ''}" type="button" data-favorite="${vehicle.name}" aria-label="${favorites.has(vehicle.name) ? 'Убрать из избранного' : 'Добавить в избранное'}">★</button>
-        <button class="compare-button ${compareSelection.includes(vehicle.name) ? 'active' : ''}" type="button" data-compare="${vehicle.name}">${compareSelection.includes(vehicle.name) ? 'В сравнении' : 'Сравнить'}</button>
       </div>
     </article>
   `).join('');
@@ -128,33 +123,6 @@ function renderVehicles() {
     localStorage.setItem(favoriteKey, JSON.stringify([...favorites]));
     renderVehicles();
   }));
-  grid.querySelectorAll('[data-compare]').forEach(button => button.addEventListener('click', event => {
-    event.preventDefault();
-    event.stopPropagation();
-    const name = button.dataset.compare;
-    if (compareSelection.includes(name)) compareSelection = compareSelection.filter(item => item !== name);
-    else if (compareSelection.length < 2) compareSelection = [...compareSelection, name];
-    localStorage.setItem(compareKey, JSON.stringify(compareSelection));
-    renderVehicles();
-    renderComparison();
-  }));
-}
-
-function renderComparison() {
-  const panel = document.querySelector('#comparison-panel');
-  if (!panel) return;
-  const selected = compareSelection.map(name => vehicles.find(vehicle => vehicle.name === name)).filter(Boolean);
-  panel.hidden = selected.length === 0;
-  panel.innerHTML = selected.length === 0 ? '' : `
-    <div class="comparison-heading"><div><p class="section-label">Сравнение</p><h3>${selected.length === 2 ? 'Две машины. Один выбор.' : 'Выберите ещё одну машину'}</h3></div><button class="clear-compare" type="button">Очистить</button></div>
-    ${selected.length === 2 ? `<div class="comparison-table"><div class="comparison-row comparison-title"><span>Параметр</span>${selected.map(vehicle => `<strong>${vehicle.name}</strong>`).join('')}</div>${Object.entries(statLabels).map(([key, label]) => `<div class="comparison-row"><span>${label}</span>${selected.map(vehicle => `<b>${vehicle.stats[key]}${key === 'speed' ? ' км/ч' : key === 'penetration' ? ' мм' : ''}</b>`).join('')}</div>`).join('')}</div>` : `<p class="comparison-hint">Нажмите «Сравнить» на любой другой карточке.</p>`}
-  `;
-  panel.querySelector('.clear-compare')?.addEventListener('click', () => {
-    compareSelection = [];
-    localStorage.setItem(compareKey, '[]');
-    renderVehicles();
-    renderComparison();
-  });
 }
 
 if (grid) {
@@ -170,7 +138,6 @@ if (grid) {
   previousButton.addEventListener('click', () => grid.scrollBy({ left: -grid.clientWidth * 0.82, behavior: 'smooth' }));
   nextButton.addEventListener('click', () => grid.scrollBy({ left: grid.clientWidth * 0.82, behavior: 'smooth' }));
   renderVehicles();
-  renderComparison();
 }
 
 const detail = document.querySelector('#tank-detail');
